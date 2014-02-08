@@ -32,7 +32,7 @@ openssl aes-256-cbc -k $CRYPT_PSWD -d -in $1  -out $2
 }
 
 
-echo "begin backup at ${now}" >> ${LOG} 
+echo "begin backup at " $(date) >> ${LOG} 
 
 
 mkdir -p $BACKUP_LOCAL_DIR
@@ -48,7 +48,7 @@ fi
     openssl aes-256-cbc -k $CRYPT_PSWD |
     split -a 4 -b 64m - $BACKUP_LOCAL_DIR/data.${now}.tar.aes. 
 )  >> ${LOG} 2>&1 
-echo "end files backup at ${now}" >> ${LOG}
+echo "end files backup at "$(date) >> ${LOG}
 
 #mysql
 sql=$BACKUP_LOCAL_DIR/db.${now}.sql
@@ -57,12 +57,12 @@ mysqldump -A --single-transaction -u root $MYSQL_PSWD> $sql
 gzip $sql
 encrypt $sql.gz $sql.gz.aes
 rm $sql.gz
-echo "end mysql backup at ${now}" >> ${LOG}
+echo "end mysql backup at "$(date) >> ${LOG}
 
 
 ${UPLOAD} $BACKUP_LOCAL_DIR/ $REMOTE_DIR >> ${LOG} 2>&1 
-echo "end upload at ${now}" >> ${LOG} 
+echo "end upload at "$(date) >> ${LOG} 
 rm -rf $BACKUP_LOCAL_DIR/ 
 
 
-echo "end all backup at ${now}" >> ${LOG}
+echo "end all backup at "$(date) >> ${LOG}
