@@ -86,7 +86,7 @@ def ls_dir(dir,indent=0):
     meta_info=kuaipan_file.metadata(dir)
         #pprint.pprint(meta_info)
     if 'type' in meta_info and meta_info['type'] != "folder":
-        print ' '*indent,meta_info['path'],'\t',meta_info['type'],'\t',meta_info['sha1'],'\t',meta_info['modify_time']
+        print ' '*indent,meta_info['path'],'\t',meta_info['size'],'\t',meta_info['type'],'\t',meta_info['sha1'],'\t',meta_info['modify_time']
     else:
         print ' '*indent,'\t',meta_info['path']
         if 'files' in meta_info:
