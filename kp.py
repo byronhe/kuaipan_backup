@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 #
 
-__author__ = 'byronhe (lh2008999@gmail.com)'
+__author__ = 'byronhe '
 
 import Kuaipan
 import pprint
